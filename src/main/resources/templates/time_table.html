@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <div layout:fragment="mainFragment">
+                <div class="container" style="justify-content: center">
+                        <h1 style="text-align: center">Choose your time=)</h1>
+                        <br>
+                        <br>
+                    <div class="row" style="justify-content: center">
+                        <div class="col-4" th:each="st:${certaintable}">
+                            <div class="card text-center mb-4" >
+                                <div class="shadow-lg">
+                                    <h5 class="card-header" th:text="${st.day}"></h5>
+                                    <div class="card-body">
+                                        <h5 class="card-title" >Time:</h5>
+                                        <p class="card-text" th:text="${st.time}"></p>
+    <!--                                    <p th:text="${st.status} ? 'Booked' : 'Free'"></p>-->
+                                        <button class="btn btn-info  btn-sm"  th:if="${st.status==false}" th:text="${'Free'}"></button><br>
+                                        <button class="btn btn-danger btn-sm"   th:unless="${st.status==false}" th:text="${'Reserved'}"></button><br>
+                                        <a  class="btn btn-primary d-grid gap-2 btn-sm" th:if="${st.status==false}" th:text="${'Reserve me'}"  th:href="@{'/change_status/' + ${st.getId()}}"></a>
+
+                                        <br>
+                                        <a th:href="@{'/edittable/' + ${st.id}}" sec:authorize="hasAnyRole('ROLE_ADMIN')" class="btn btn-success btn-sm">edit</a>
+                                        <a th:href="@{'/deletetable/' + ${st.id}}" sec:authorize="hasAnyRole('ROLE_ADMIN')"class="btn btn-danger btn-sm">delete</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+</body>
+</html>

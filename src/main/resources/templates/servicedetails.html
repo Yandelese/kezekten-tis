@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <div layout:fragment="mainFragment">
+
+                <div class="container" style="justify-content: center">
+
+                        <div class="container-fluid p-5 bg-primary text-white text-center" th:each="cs:${certain_service}" >
+                            <h1 th:text="${cs.name}"></h1>
+                            <p>Please choose the best for you!</p>
+                            <a th:href="@{'/addestablishment/' + ${cs.id}}" class="btn btn-light btn-sm" sec:authorize="hasAnyRole('ROLE_ADMIN')" style="margin-left: 50px"> + New Establishment </a>
+                        </div>
+
+                        <div class="container mt-5" style="text-align: center">
+                            <div class="row" >
+                                <div class="col-sm-4" th:each="cs_est:${certain_service.establishmentList}">
+                                    <h3 th:text="${cs_est.name}"></h3>
+                                    <a th:href="@{'/feedback1/' + ${cs_est.id}}" class="link-primary" style="text-decoration: none">Customers Reviews</a><br><br>
+                                    <a th:href="@{'/make_queue/'+ ${cs_est.id}}" class="btn btn-primary btn-sm" style="text-decoration: none"> Time table</a>
+                                        <br>
+                                        <br>
+                                    <div class="btn-group" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Settings
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a th:href="@{'/addtable/' + ${cs_est.id}}" class="btn btn-light btn-sm" sec:authorize="hasAnyRole('ROLE_ADMIN')">fix table</a></li>
+                                            <li><a th:href="@{'/editestablishment/' + ${cs_est.id}}" class="btn btn-light btn-sm" sec:authorize="hasAnyRole('ROLE_ADMIN')">Edit</a></li>
+                                            <li><a th:href="@{'/deleteestablishment/' + ${cs_est.id}}" class="btn btn-light btn-sm" sec:authorize="hasAnyRole('ROLE_ADMIN')">Delete</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+</body>
+</html>

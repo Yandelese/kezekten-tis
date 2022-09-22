@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body th:onload="'loadallfeedbacks('+${establishment.id}+')'">
+
+
+            <div layout:fragment="mainFragment">
+                <div class="container" style="justify-content: center">
+                        <div class="mb-3" >
+                            <a  class="btn btn-success btn-sm" type="submit" th:onclick="'addfeedback('+${establishment.id}+')'">+ add</a><br><br>
+                            <textarea class="form-control"  id="feedback" placeholder="Share with your opinion:" rows="3" required></textarea>
+
+                            <script type="text/javascript">
+                                function addfeedback(establishment_id) {
+                                    let feedback=document.getElementById("feedback")
+                                    const result = new XMLHttpRequest();//формируем запрос
+                                    result.open("POST", "http://localhost:7778/feedback")//вид запроса и куда отправляем
+                                    result.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                    result.send("feedback="+feedback.value+"&establishment_id="+establishment_id)//отправляем запрос
+
+                                    result.onload=function (){
+                                        loadallfeedbacks(establishment_id)
+                                    }
+
+                                }
+                            </script>
+                        </div>
+
+                    <input type="hidden" id="currentuserid" th:value="${currentuser.id}">
+
+                        <div class="card"  id="content">
+    <!--                        <h5 class="card-header"></h5>-->
+                            <div class="card-body">
+    <!--                            <h7 class="card-title" style="font-weight: bold">Feedback:</h7>-->
+    <!--                            <p class="card-text"></p>-->
+                            </div>
+                        </div>
+
+                    <script>
+                        function loadallfeedbacks(establishment_id){
+                            // alert("@@@@@@@@@@@@@@@")
+                            const result = new XMLHttpRequest();//формируем запрос
+                            result.open("GET", "http://localhost:7778/feedback/allfeedbacks?establishment_id="+establishment_id)//вид запроса и куда отправляем
+                            result.send()//отправляем запрос
+                            result.onload=function (){
+                                let result=JSON.parse(this.responseText)
+                                console.log(result)
+                                let contentHtml="";
+                                for(i=0;i<result.length;i++){
+                                    contentHtml+="<h5 class='card-header'>"+result[i].author.full_name+"</h5>"
+                                    contentHtml+="<p class='card-text' style='font-weight: bold; margin-left: 15px'>"+result[i].content+"</p>"
+                                    contentHtml+="<p class='card-text' style='font-weight: bold; margin-left: 15px'>"+result[i].postdate+"</p>"
+
+                                    if(currentuserid.value==result[i].author.id){
+                                        contentHtml+="<svg  style='margin-left: 15px'    onclick='deletefeedback("+result[i].id+")' xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-trash\" viewBox=\"0 0 16 16\">\n" +
+                                            "  <path d=\"M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z\"/>\n" +
+                                            "  <path fill-rule=\"evenodd\" d=\"M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z\"/>\n" +
+                                            "</svg>"
+                                    }else {
+                                        "nothing"
+                                    }
+                                }
+                                document.getElementById("content").innerHTML=contentHtml;
+
+                            }
+                        }
+                    </script>
+
+
+                    <script type="text/javascript">
+                        function deletefeedback(feedbackid){
+                            // alert(feedbackid)
+                            let xhttp=new XMLHttpRequest();
+                            xhttp.onload=function (){
+                            const result=JSON.parse(this.responseText);
+                            console.log(result)
+                                loadallfeedbacks(result.id);
+                            }
+                            xhttp.open("POST","/feedback/deletefeedback");
+                            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            xhttp.send("feedbackid="+feedbackid);
+
+                        }
+                    </script>
+                </div>
+            </div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html"
+      xmlns:sec="http://www.thymleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+     <body>
+                <div layout:fragment="mainFragment">
+                    <div class="container" style="justify-content: center" >
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col"th:each="st:${allservices}">
+                                <div class="card">
+                                    <img src="https://www.viscom.com/fileadmin/content/service/Viscom_Service_Header_allgemein_web.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${st.name}"></h5>
+                                        <a th:href="@{'/service_details/' + ${st.id}}" class="btn btn-primary btn-sm">View More</a>
+                                        <a th:href="@{'/addservice'}" class="btn btn-light btn-sm" sec:authorize="hasAnyRole('ROLE_ADMIN')" style="margin-left: 50px">Add </a>
+                                        <a th:href="@{'/editservice/' + ${st.id}}" class="btn btn-light btn-sm" sec:authorize="hasAnyRole('ROLE_ADMIN')">Edit</a>
+                                        <a th:href="@{'/deleteservice/' + ${st.id}}" class="btn btn-light btn-sm" sec:authorize="hasAnyRole('ROLE_ADMIN')">Delete</a>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+     </body>
+</html>

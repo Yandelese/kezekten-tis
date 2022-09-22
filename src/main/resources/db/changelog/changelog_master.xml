@@ -1,0 +1,97 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="Kayirzhan" id="2022_09_11_0.0.1_create_roles_and_user_tables">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changes/2022_09_11_0.0.1_create_roles_and_user_tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Kayirzhan" id="2022_09_11_0.0.2_insert_data_into_tables">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changes/2022_09_11_0.0.2_insert_data_into_tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Kayirzhan" id="2022_09_11_0.0.3_create_connection_table and_insert_data_into_user_roles_table.sql">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changes/2022_09_11_0.0.3_create_connection_table and_insert_data_into_user_roles_table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Kayirzhan" id="2022_09_12_0.0.1_create_service_and_establishment_table">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changes/2022_09_12_0.0.1_create_service_and_establishment_table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+
+    <changeSet author="Kayirzhan" id="2022_09_12_0.0.2_create_connection_table.sql">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changes/2022_09_12_0.0.2_create_connection_table.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Kayirzhan" id="2022_09_16_0.0.1_create_t_tables.sql">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changes/2022_09_16_0.0.1_create_t_tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Kayirzhan" id="2022_09_17_0.0.1_create_comments_tables.sql">
+        <sqlFile dbms="postgresql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="changes/2022_09_17_0.0.1_create_comments_tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+<!--    <changeSet author="Kayirzhan" id="2022_09_13_0.0.1_create_days_and_times_table.sql">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="../../../java/kezekten_tis/kezekten_tis/rub/2022_09_13_0.0.1_create_days_and_times_table.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
+
+<!--    <changeSet author="Kayirzhan" id="2022_09_13_0.0.2_create_t_tables_test.sql">-->
+<!--        <sqlFile dbms="postgresql"-->
+<!--                 encoding="utf8"-->
+<!--                 endDelimiter=";"-->
+<!--                 path="../../../java/kezekten_tis/kezekten_tis/rub/2022_09_13_0.0.2_create_t_tables_test.sql"-->
+<!--                 relativeToChangelogFile="true"-->
+<!--                 splitStatements="true"-->
+<!--                 stripComments="true"/>-->
+<!--    </changeSet>-->
+
+</databaseChangeLog>
